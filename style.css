@@ -4,6 +4,9 @@
 }
 
 .calculator-body {
+    display: flex;
+    flex-flow: column wrap;
+
     height: 400px;
     width: 325px;
     border: black solid 3px;
@@ -13,14 +16,24 @@
 /*---------Styling Inside The Calculator---------*/
 
 .number-display {
+    flex: auto;
     height: 50px;
     border-bottom: solid black 2px;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+
+    flex: auto;
+    flex-grow: 10;
 }
 
 /* Keypad Styling */
 
 .keypad-wrapper {
-    height: 100px;
+    flex: auto;
+    flex-basis: 200px;
     width: 100px;
     border: solid black 2px;
 }
@@ -28,6 +41,7 @@
 /* Equation Buttons Styling */
 
 .equation-wrapper {
+    flex: auto;
     height: 100px;
     width: 100px;
     border: solid black 2px;
