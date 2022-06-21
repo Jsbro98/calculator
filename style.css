@@ -33,14 +33,13 @@
 
 .keypad-wrapper {
     flex: auto;
-    flex-basis: 200px;
     width: 100px;
     border: solid black 2px;
 }
 
 /* Equation Buttons Styling */
 
-.equation-wrapper {
+.equation-container {
     flex: auto;
     height: 100px;
     width: 100px;
