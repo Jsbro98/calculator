@@ -15,7 +15,7 @@
     width: 425px;
     border: black solid 3px;
     border-radius: 5%;
-    padding: 5px;
+    padding: 6px;
 }
 
 /*---------Styling Inside The Calculator---------*/
@@ -37,9 +37,28 @@
 /* Keypad Styling */
 
 .keypad-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 20px;
+    gap: 4px;
+
     flex: auto;
     width: 100px;
     border: solid black 2px;
+}
+
+.keypad-wrapper > * {
+    flex: auto;
+    flex-basis: 75px;
+}
+
+.keypad-zero-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.keypad.zero {
+    width: 96px;
 }
 
 /* Equation Buttons Styling */
