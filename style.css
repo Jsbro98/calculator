@@ -45,7 +45,6 @@
 
     flex: auto;
     width: 100px;
-    border: solid black 2px;
 }
 
 .keypad-wrapper > * {
@@ -94,7 +93,6 @@
     flex: auto;
     height: 100px;
     width: 100px;
-    border: solid black 2px;
 }
 
 .equation-container > button {
