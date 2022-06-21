@@ -67,10 +67,19 @@
 .keypad-wrapper > button {
     border: rgb(212, 0, 0) solid 2px;
     color: white;
-    background-color: rgb(255, 0, 0);
+    background-color: red;
     max-height: 95px;
     max-width: 95px;
     font-size: 30px;
+}
+
+.keypad-wrapper > button:hover {
+    background-color: rgb(217, 0, 0);
+    border: red solid 2px;
+}
+
+.keypad-wrapper > button:active {
+    background-color: rgb(255, 79, 79);
 }
 
 .keypad-zero-wrapper {
@@ -81,13 +90,22 @@
 
 .keypad.zero {
     border: rgb(212, 0, 0) solid 2px;
-    background-color: rgb(255, 0, 0);
+    background-color: red;
     color: white;
     width: 95px;
     border-radius: 50%;
     line-height: 0;
     padding: 0;
     font-size: 30px;
+}
+
+.keypad.zero:hover {
+    background-color: rgb(217, 0, 0);
+    border: red solid 2px;
+}
+
+.keypad.zero:active {
+    background-color: rgb(255, 79, 79);
 }
 
 /* Equation Buttons Styling */
@@ -119,6 +137,15 @@
     font-size: 30px;
 }
 
+.equation-container > button:hover {
+    background-color: rgb(235, 153, 0);
+    border: orange solid 2px;
+}
+
+.equation-container > button:active {
+    background-color: rgb(255, 179, 39);
+}
+
 /* Clear & Equals Button Styling */
 
 .clear-button {
@@ -128,11 +155,29 @@
     font-size: 25px;
 }
 
+.clear-button:hover {
+    background-color: rgb(227, 227, 0);
+}
+
+.clear-button:active {
+    background-color: rgb(255, 255, 78);
+    border: yellow solid 2px;
+}
+
 .equals-button {
     height: 60px;
     border: rgb(212, 0, 0) solid 2px;
-    background-color: rgb(255, 0, 0);
+    background-color: red;
     color: white;
     font-size: 30px;
+}
+
+.equals-button:hover {
+    background-color: rgb(217, 0, 0);
+    border: red solid 2px;
+}
+
+.equals-button:active {
+    background-color: rgb(255, 79, 79);
 }
 
