@@ -15,7 +15,7 @@
     width: 425px;
     border: black solid 3px;
     border-radius: 5%;
-    padding: 6px;
+    padding: 15px;
 }
 
 /*---------Styling Inside The Calculator---------*/
@@ -29,6 +29,7 @@
 .input-wrapper {
     display: flex;
     flex-flow: row wrap;
+    gap: 3px;
 
     flex: auto;
     flex-grow: 10;
@@ -63,16 +64,28 @@
 
 /* Equation Buttons Styling */
 
-.equation-clear-wrapper {
+.equation-clear-equals-wrapper {
+    gap: 3px;
     display: flex;
     flex-flow: column;
 }
 
 .equation-container {
+    padding: 5px 0;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    gap: 4px;
+
     flex: auto;
     height: 100px;
     width: 100px;
     border: solid black 2px;
+}
+
+.equation-container > button {
+    flex: auto;
+    width: 75px;
 }
 
 /* Clear & Equals Button Styling */
@@ -84,3 +97,4 @@
 .equals-button {
     height: 60px;
 }
+
