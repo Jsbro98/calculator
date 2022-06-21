@@ -40,7 +40,7 @@
 .keypad-wrapper {
     display: flex;
     flex-flow: row wrap;
-    padding: 20px;
+    padding: 10px;
     gap: 4px;
 
     flex: auto;
@@ -51,15 +51,29 @@
 .keypad-wrapper > * {
     flex: auto;
     flex-basis: 75px;
+    border-radius: 50%;
+    line-height: 0;
+    padding: 0;
+}
+
+.keypad-wrapper > button {
+    border: black solid 2px;
+    max-height: 95px;
+    max-width: 95px;
 }
 
 .keypad-zero-wrapper {
     display: flex;
     justify-content: center;
+    max-height: 95px;
 }
 
 .keypad.zero {
-    width: 96px;
+    border: solid black 2px;
+    width: 95px;
+    border-radius: 50%;
+    line-height: 0;
+    padding: 0;
 }
 
 /* Equation Buttons Styling */
@@ -86,15 +100,18 @@
 .equation-container > button {
     flex: auto;
     width: 75px;
+    border: solid 2px black;
 }
 
 /* Clear & Equals Button Styling */
 
 .clear-button {
     height: 60px;
+    border: 2px solid black;
 }
 
 .equals-button {
     height: 60px;
+    border: 2px solid black;
 }
 
