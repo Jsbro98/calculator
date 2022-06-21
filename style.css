@@ -46,7 +46,7 @@
 
 /* Keypad Styling */
 
-.keypad-wrapper {
+.keypad-container {
     display: flex;
     flex-flow: row wrap;
     padding: 10px;
@@ -56,7 +56,7 @@
     width: 100px;
 }
 
-.keypad-wrapper > * {
+.keypad-container > * {
     flex: auto;
     flex-basis: 75px;
     border-radius: 50%;
@@ -64,7 +64,7 @@
     padding: 0;
 }
 
-.keypad-wrapper > button {
+.keypad-container > button {
     border: rgb(212, 0, 0) solid 2px;
     color: white;
     background-color: red;
@@ -73,12 +73,12 @@
     font-size: 30px;
 }
 
-.keypad-wrapper > button:hover {
+.keypad-container > button:hover {
     background-color: rgb(217, 0, 0);
     border: red solid 2px;
 }
 
-.keypad-wrapper > button:active {
+.keypad-container > button:active {
     background-color: rgb(255, 79, 79);
 }
 
