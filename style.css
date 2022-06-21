@@ -74,3 +74,13 @@
     width: 100px;
     border: solid black 2px;
 }
+
+/* Clear & Equals Button Styling */
+
+.clear-button {
+    height: 60px;
+}
+
+.equals-button {
+    height: 60px;
+}
