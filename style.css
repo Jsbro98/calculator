@@ -13,17 +13,26 @@
     margin-top: 15px;
     height: 500px;
     width: 425px;
-    border: black solid 3px;
+    border: red solid 4px;
     border-radius: 5%;
+    background-color: rgba(255, 52, 52, 0.609);
     padding: 15px;
+    box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.58);
 }
 
 /*---------Styling Inside The Calculator---------*/
 
 .number-display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 45px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     flex: auto;
+    background-color: rgba(70, 165, 39, 0.862);
     height: 50px;
-    border: solid black 2px;
+    border-radius: 10px;
+    border: 2px rgb(57, 145, 27) solid;
 }
 
 .input-wrapper {
@@ -56,9 +65,12 @@
 }
 
 .keypad-wrapper > button {
-    border: black solid 2px;
+    border: rgb(212, 0, 0) solid 2px;
+    color: white;
+    background-color: rgb(255, 0, 0);
     max-height: 95px;
     max-width: 95px;
+    font-size: 30px;
 }
 
 .keypad-zero-wrapper {
@@ -68,11 +80,14 @@
 }
 
 .keypad.zero {
-    border: solid black 2px;
+    border: rgb(212, 0, 0) solid 2px;
+    background-color: rgb(255, 0, 0);
+    color: white;
     width: 95px;
     border-radius: 50%;
     line-height: 0;
     padding: 0;
+    font-size: 30px;
 }
 
 /* Equation Buttons Styling */
@@ -98,18 +113,26 @@
 .equation-container > button {
     flex: auto;
     width: 75px;
-    border: solid 2px black;
+    color: white;
+    background-color: orange;
+    border: solid 2px rgb(255, 196, 1);
+    font-size: 30px;
 }
 
 /* Clear & Equals Button Styling */
 
 .clear-button {
     height: 60px;
-    border: 2px solid black;
+    border: 2px solid rgb(205, 205, 0);
+    background-color: yellow;
+    font-size: 25px;
 }
 
 .equals-button {
     height: 60px;
-    border: 2px solid black;
+    border: rgb(212, 0, 0) solid 2px;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    font-size: 30px;
 }
 
