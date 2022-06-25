@@ -67,18 +67,22 @@ function evaluate() {
     if(numberTwo == null || equation == null) {return;}
     if (equation === '+') {
         const result = numberOne + numberTwo;
+        console.log(`${numberOne} + ${numberTwo} = ${result}`);
         return result;
     }
     if (equation === '-') {
         const result = numberOne - numberTwo;
+        console.log(`${numberOne} - ${numberTwo} = ${result}`);
         return result;
     }
     if (equation === '*') {
         const result = numberOne * numberTwo;
+        console.log(`${numberOne} * ${numberTwo} = ${result}`);
         return result;
     }
     if (equation === '/') {
         const result = numberOne / numberTwo;
+        console.log(`${numberOne} / ${numberTwo} = ${result}`);
         return result;
     }
 };
@@ -136,21 +140,19 @@ calculatorButtons.forEach(button => {
                 operandTwo.value.push(value);
                 operandTwo.hasValue = true;
             }
-            if (operandTwo.hasValue && value === "=") {
-                operandTwo.finishedWithInput = true;
-                operatorOrEquals.value = value;
-                operatorOrEquals.whichValue.isEquals = true;
-                evaluated = true;
-                return evaluate();
-            }
-            if (operandTwo.hasValue && isValueAnOperator) {
+            if (operandTwo.hasValue && (isValueAnOperator || value === "=")) {
                 function setOperandOneValue() {
+                    if (result < 0) {
+                        operandOne.value.push(result)
+                        return operandOne.value;
+                    };
+
                     operandOne.value.push(...result.toString());
 
                     for (i = 0; i < operandOne.value.length; i++) {
                         const array = operandOne.value;
                         array[i] = Number(array[i]);
-                    }
+                    };
 
                 };
 
@@ -159,7 +161,9 @@ calculatorButtons.forEach(button => {
                 setOperandOneValue();
                 operandOne.finishedWithInput = true;
                 operandOne.hasValue = true;
-                operator.value = value;
+                if (isValueAnOperator) {
+                    operator.value.push(value);
+                }
                 operator.hasValue = true;
             };
 
