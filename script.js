@@ -166,10 +166,6 @@ calculatorButtons.forEach(button => {
         };
         function checkInputArray() {
 
-            function logEach() {
-                for (key in inputArrayValues) {console.log(key, ":", inputArrayValues[key])};
-            };
-
             const inputArrayValues = {
 
                 numberOne: input[0],
