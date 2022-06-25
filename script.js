@@ -109,22 +109,6 @@ calculatorButtons.forEach(button => {
 
         const isValueAnOperator = isOperator();
 
-       /* function isEquals() {
-            const value = e.target.textContent;
-            if (value === "=") {
-                return true;
-            }
-            return false;
-        }
-
-        function equationPresent() {
-            const value = input[1];
-            if (value === "/" || value === "*" || value === "-" || value === "+") {
-                return true;
-            }
-            return false;
-        } */
-
         function pushIntoInputArray() {
             const value = e.target.textContent;
             if (operandOne.finishedWithInput === false && !isValueAnOperator) {
