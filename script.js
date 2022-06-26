@@ -126,7 +126,8 @@ calculatorButtons.forEach(button => {
                 operandTwo.hasValue = true;
             }
             if (operandTwo.hasValue && (isValueAnOperator || value === "=")) {
-                // this function is needed to carry over an evaluation to the beginning of the input array 
+                /* this function is needed to carry over an evaluation to the beginning
+                 of the input array after reseting the input array */
                 function setOperandOneValue() {
                     if (result < 0) {
                         operandOne.value.push(result)
