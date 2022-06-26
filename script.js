@@ -1,8 +1,4 @@
-
-
-function log(input) {
-    console.log(input);
-};
+// objects used in button event listener, these are used in the input array
 
 const operandOne = {
     finishedWithInput: false,
@@ -56,9 +52,10 @@ const operatorOrEquals = {
         this.whichValue.isOperator = false;
     },
 };
-
+// the input array that the calculator uses for storing and evaluating
 const input = [operandOne.value, operator.value, operandTwo.value, operatorOrEquals.value];
 
+// the core evaluate function
 let evaluated = false;
 function evaluate() {
     const equation = operator.value[0];
@@ -87,6 +84,7 @@ function evaluate() {
     }
 };
 
+// selectors to grab all calculator buttons
 const keypadNumbers = document.querySelectorAll('.keypad-container > button, .keypad.zero');
 
 const equationButtons = document.querySelectorAll('.equation-container > button');
@@ -95,10 +93,12 @@ const calculatorButtons = Array.from(keypadNumbers).concat(Array.from(equationBu
 const equalButton = document.querySelector('.equals-button');
 calculatorButtons.push(equalButton);
 
+//function for adding the event listener for all calculator buttons
 function addButtonListener() {
 
 calculatorButtons.forEach(button => {
     button.addEventListener('click', (e) => {
+        // test a value to see if its an operator
         function isOperator() {
             const value = e.target.textContent;
             if (value === "/" || value === "*" || value === "-" || value === "+") {
@@ -109,6 +109,7 @@ calculatorButtons.forEach(button => {
 
         const isValueAnOperator = isOperator();
 
+        // function for pushing the numbers and operators from the calculator buttons into the input array above
         function pushIntoInputArray() {
             const value = e.target.textContent;
             if (operandOne.finishedWithInput === false && !isValueAnOperator) {
@@ -125,6 +126,7 @@ calculatorButtons.forEach(button => {
                 operandTwo.hasValue = true;
             }
             if (operandTwo.hasValue && (isValueAnOperator || value === "=")) {
+                // this function is needed to carry over an evaluation to the beginning of the input array 
                 function setOperandOneValue() {
                     if (result < 0) {
                         operandOne.value.push(result)
@@ -152,6 +154,7 @@ calculatorButtons.forEach(button => {
             };
 
         }
+        // function for resetting resetting input array
         function resetInputArrayAndValues() {
             (function (...objects) {
                 const objectsArray = objects;
@@ -164,6 +167,8 @@ calculatorButtons.forEach(button => {
             input[2] = operandTwo.value;
             input[3] = operatorOrEquals.value;
         };
+
+        // function used to check if the calculator evaluated an equation
         function checkInputArray() {
 
             const inputArrayValues = {
