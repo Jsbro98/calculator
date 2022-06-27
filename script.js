@@ -65,6 +65,7 @@ function evaluate() {
     let numberOne = Number(operandOne.value.join(""));
     let numberTwo = Number(operandTwo.value.join(""));
 
+    // for loop to make the numbers negative
     for (i = 0; i < input.length - 1; i++) {
        const operandOneIsNegative = operandOne.isNegative;
        const operandTwoIsNegative = operandTwo.isNegative;
@@ -72,11 +73,11 @@ function evaluate() {
 
         if (currentValue === equation) {
             continue;
-        } else if (Number(currentValue) === numberOne) {
+        } else if (Number(currentValue) === numberOne && numberOne !== 0) {
             if (operandOneIsNegative) {
                 numberOne = -Math.abs(numberOne);
             }
-        } else if (Number(currentValue) === numberTwo) {
+        } else if (Number(currentValue) === numberTwo && numberTwo !== 0) {
             if (operandTwoIsNegative) {
                 numberTwo = -Math.abs(numberTwo);
             }
@@ -100,6 +101,7 @@ function evaluate() {
         return result;
     }
     if (equation === '/') {
+        if (numberTwo === 0) {return console.log("No dividing by zero!")};
         const result = numberOne / numberTwo;
         console.log(`${numberOne} / ${numberTwo} = ${result}`);
         return result;
@@ -127,9 +129,9 @@ function makeValueNegative() {
     const isOperatorDone = operator.hasValue;
     const isOperandOneAndOperatorDone = (isOperandOneDone && isOperatorDone);
 
-    if(isOperandOneDone && !isOperandOneAndOperatorDone) {
+    if(isOperandOneDone && !isOperandOneAndOperatorDone && operandOne.value !== 0) {
        return operandOne.isNegative = true;
-    } else if (isOperandTwoDone || isOperandOneAndOperatorDone) {
+    } else if ((isOperandTwoDone || isOperandOneAndOperatorDone) && operandTwo.value !== 0) {
        return operandTwo.isNegative = true;
     } else  {
         return operandOne.isNegative = true;
@@ -194,7 +196,7 @@ calculatorButtons.forEach(button => {
                         return operandOne.value;
                     };
 
-                    operandOne.value.push(...result.toString());
+                    if (result !== undefined) {operandOne.value.push(...result.toString())};
 
                     for (i = 0; i < operandOne.value.length; i++) {
                         const array = operandOne.value;
