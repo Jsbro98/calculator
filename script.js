@@ -4,10 +4,12 @@ const operandOne = {
     finishedWithInput: false,
     hasValue: false,
     value: [],
+    isNegative: false,
     resetValues() {
         this.finishedWithInput = false;
         this.hasValue = false;
         this.value = [];
+        this.isNegative = false;
     },
 };
 
@@ -15,10 +17,12 @@ const operandTwo = {
     finishedWithInput: false,
     hasValue: false,
     value: [],
+    isNegative: false,
     resetValues() {
         this.finishedWithInput = false;
         this.hasValue = false;
         this.value = [];
+        this.isNegative = false;
     },
 };
 
@@ -56,11 +60,29 @@ const operatorOrEquals = {
 const input = [operandOne.value, operator.value, operandTwo.value, operatorOrEquals.value];
 
 // the core evaluate function
-let evaluated = false;
 function evaluate() {
     const equation = operator.value[0];
-    const numberOne = Number(operandOne.value.join(""));
-    const numberTwo = Number(operandTwo.value.join(""));
+    let numberOne = Number(operandOne.value.join(""));
+    let numberTwo = Number(operandTwo.value.join(""));
+
+    for (i = 0; i < input.length - 1; i++) {
+       const operandOneIsNegative = operandOne.isNegative;
+       const operandTwoIsNegative = operandTwo.isNegative;
+       const currentValue = input[i].join("");
+
+        if (currentValue === equation) {
+            continue;
+        } else if (Number(currentValue) === numberOne) {
+            if (operandOneIsNegative) {
+                numberOne = -Math.abs(numberOne);
+            }
+        } else if (Number(currentValue) === numberTwo) {
+            if (operandTwoIsNegative) {
+                numberTwo = -Math.abs(numberTwo);
+            }
+        };
+    };
+
     if(numberTwo == null || equation == null) {return;}
     if (equation === '+') {
         const result = numberOne + numberTwo;
@@ -87,14 +109,52 @@ function evaluate() {
 // selectors to grab all calculator buttons
 const keypadNumbers = document.querySelectorAll('.keypad-container > button, .keypad.zero');
 
-const equationButtons = document.querySelectorAll('.equation-container > button');
+const equationButtons = document.querySelectorAll('.equation-container > button:not(.equation.negative)');
 
 const calculatorButtons = Array.from(keypadNumbers).concat(Array.from(equationButtons));
 const equalButton = document.querySelector('.equals-button');
+const negativeButton = document.querySelector('.equation.negative');
+const clearButton = document.querySelector('.clear-button');
 calculatorButtons.push(equalButton);
 
 //function for adding the event listener for all calculator buttons
-function addButtonListener() {
+function addButtonListeners() {
+
+// function to set isNegative on operand objects
+function makeValueNegative() {
+    const isOperandOneDone = (operandOne.hasValue && operandOne.finishedWithInput);
+    const isOperandTwoDone = operandTwo.hasValue;
+    const isOperatorDone = operator.hasValue;
+    const isOperandOneAndOperatorDone = (isOperandOneDone && isOperatorDone);
+
+    if(isOperandOneDone && !isOperandOneAndOperatorDone) {
+       return operandOne.isNegative = true;
+    } else if (isOperandTwoDone || isOperandOneAndOperatorDone) {
+       return operandTwo.isNegative = true;
+    } else  {
+        return operandOne.isNegative = true;
+    }
+
+};
+
+// setting event listeners for negative and clear
+negativeButton.addEventListener('click', makeValueNegative);
+clearButton.addEventListener('click',(e) => {resetInputArrayAndValues(); console.log("input cleared")});
+
+// function for resetting resetting input array
+function resetInputArrayAndValues() {
+    (function (...objects) {
+        const objectsArray = objects;
+        objectsArray.forEach((object) => {object.resetValues()});
+    }) (operandOne, operandTwo, operator, operatorOrEquals);
+
+    evaluated = false;
+    input[0] = operandOne.value;
+    input[1] = operator.value;
+    input[2] = operandTwo.value;
+    input[3] = operatorOrEquals.value;
+};
+
 
 calculatorButtons.forEach(button => {
     button.addEventListener('click', (e) => {
@@ -125,7 +185,7 @@ calculatorButtons.forEach(button => {
                 operandTwo.value.push(value);
                 operandTwo.hasValue = true;
             }
-            if (operandTwo.hasValue && (isValueAnOperator || value === "=")) {
+            if (operandTwo.hasValue && (isValueAnOperator || value === "=") && operandOne.hasValue !== false) {
                 /* this function is needed to carry over an evaluation to the beginning
                  of the input array after reseting the input array */
                 function setOperandOneValue() {
@@ -155,46 +215,13 @@ calculatorButtons.forEach(button => {
             };
 
         }
-        // function for resetting resetting input array
-        function resetInputArrayAndValues() {
-            (function (...objects) {
-                const objectsArray = objects;
-                objectsArray.forEach((object) => {object.resetValues()});
-            }) (operandOne, operandTwo, operator, operatorOrEquals);
 
-            evaluated = false;
-            input[0] = operandOne.value;
-            input[1] = operator.value;
-            input[2] = operandTwo.value;
-            input[3] = operatorOrEquals.value;
-        };
-
-        // function used to check if the calculator evaluated an equation
-        function checkInputArray() {
-
-            const inputArrayValues = {
-
-                numberOne: input[0],
-                equation: input[1],
-                numberTwo: input[2],
-                indexThree: input[3],
-            }
-
-            
-            if (evaluated) {
-            resetInputArrayAndValues();
-            }
-        
-        };
-    
         pushIntoInputArray(e);
 
-        checkInputArray();
-    
     })
 })
 }
 
-addButtonListener();
+addButtonListeners();
 
 const numberDisplay = document.querySelector('.number-display');
