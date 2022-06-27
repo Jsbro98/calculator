@@ -191,7 +191,12 @@ calculatorButtons.forEach(button => {
                 /* this function is needed to carry over an evaluation to the beginning
                  of the input array after reseting the input array */
                 function setOperandOneValue() {
-                    if (result < 0) {
+                    if (result > Number.MAX_SAFE_INTEGER || result < Number.MIN_SAFE_INTEGER) {
+                        const re = /,/gi;
+                        const value = result.toLocaleString().replace(re, "");
+                        return operandOne.value.push(...value);
+                    }
+                    if (result < 0 || !Number.isInteger(result)) {
                         operandOne.value.push(result)
                         return operandOne.value;
                     };
