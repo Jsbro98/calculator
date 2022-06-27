@@ -137,7 +137,7 @@ function makeValueNegative() {
 
 };
 
-// setting event listeners for negative and clear
+// setting event listeners for negative and clear buttons
 negativeButton.addEventListener('click', makeValueNegative);
 clearButton.addEventListener('click',(e) => {resetInputArrayAndValues(); console.log("input cleared")});
 
