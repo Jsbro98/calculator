@@ -154,7 +154,7 @@ function makeValueNegative() {
 
 // setting event listeners for negative and clear buttons
 negativeButton.addEventListener('click', makeValueNegative);
-clearButton.addEventListener('click',() => {resetInputArrayAndValues(); console.log("input cleared"); numberDisplay.textContent = "";});
+clearButton.addEventListener('click',() => {resetInputArrayAndValues(); console.log("input cleared"); numberContainer.textContent = "";});
 
 // function for resetting resetting input array
 function resetInputArrayAndValues() {
@@ -187,7 +187,7 @@ calculatorButtons.forEach(button => {
         // function for pushing the numbers and operators from the calculator buttons into the input array above
         function pushIntoInputArray() {
             const value = e.target.textContent;
-            if (operandOne.finishedWithInput === false && !isValueAnOperator) {
+            if ((operandOne.finishedWithInput === false) && isValueAnOperator === false) {
                 operandOne.value.push(value);
                 operandOne.hasValue = true;
             }
@@ -226,7 +226,6 @@ calculatorButtons.forEach(button => {
                 const result = evaluate();
                 resetInputArrayAndValues();
                 setOperandOneValue();
-                operandOne.finishedWithInput = true;
                 operandOne.hasValue = true;
                 if (isValueAnOperator) {
                     operator.value.push(value);
