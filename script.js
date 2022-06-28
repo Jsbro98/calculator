@@ -59,6 +59,13 @@ const operatorOrEquals = {
 // the input array that the calculator uses for storing and evaluating
 const input = [operandOne.value, operator.value, operandTwo.value, operatorOrEquals.value];
 
+const numberDisplayValue = () => {
+    let result = [operandOne.value.join(""), operator.value, operandTwo.value.join("")];
+    result = result.join(" ");
+
+    return result;
+};
+
 // the core evaluate function
 function evaluate() {
     const equation = operator.value[0];
@@ -113,6 +120,10 @@ const keypadNumbers = document.querySelectorAll('.keypad-container > button, .ke
 
 const equationButtons = document.querySelectorAll('.equation-container > button:not(.equation.negative)');
 
+// selector for the calculator display
+const numberDisplay = document.querySelector('.number-display');
+const numberContainer = document.querySelector('.number-container');
+
 const calculatorButtons = Array.from(keypadNumbers).concat(Array.from(equationButtons));
 const equalButton = document.querySelector('.equals-button');
 const negativeButton = document.querySelector('.equation.negative');
@@ -124,12 +135,14 @@ function addButtonListeners() {
 
 // function to set isNegative on operand objects
 function makeValueNegative() {
+    let negativeDisplay = numberDisplayValue();
     const isOperandOneDone = (operandOne.hasValue && operandOne.finishedWithInput);
     const isOperandTwoDone = operandTwo.hasValue;
     const isOperatorDone = operator.hasValue;
     const isOperandOneAndOperatorDone = (isOperandOneDone && isOperatorDone);
 
     if(isOperandOneDone && !isOperandOneAndOperatorDone && operandOne.value !== 0) {
+
        return operandOne.isNegative = true;
     } else if ((isOperandTwoDone || isOperandOneAndOperatorDone) && operandTwo.value !== 0) {
        return operandTwo.isNegative = true;
@@ -141,7 +154,7 @@ function makeValueNegative() {
 
 // setting event listeners for negative and clear buttons
 negativeButton.addEventListener('click', makeValueNegative);
-clearButton.addEventListener('click',(e) => {resetInputArrayAndValues(); console.log("input cleared")});
+clearButton.addEventListener('click',() => {resetInputArrayAndValues(); console.log("input cleared"); numberDisplay.textContent = "";});
 
 // function for resetting resetting input array
 function resetInputArrayAndValues() {
@@ -221,6 +234,8 @@ calculatorButtons.forEach(button => {
                 operator.hasValue = true;
             };
 
+            numberContainer.textContent = numberDisplayValue();
+
         }
 
         pushIntoInputArray(e);
@@ -231,4 +246,3 @@ calculatorButtons.forEach(button => {
 
 addButtonListeners();
 
-const numberDisplay = document.querySelector('.number-display');
