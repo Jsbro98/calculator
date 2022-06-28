@@ -30,8 +30,8 @@
     font-size: 45px;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     flex: auto;
+    min-height: 75px;
     background-color: rgba(70, 165, 39, 0.862);
-    height: 50px;
     border-radius: 10px;
     border: 2px rgb(57, 145, 27) solid;
     outline: 2px solid red;
