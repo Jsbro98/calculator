@@ -63,7 +63,12 @@ const input = [operandOne.value, operator.value, operandTwo.value, operatorOrEqu
 
 const numberDisplayValue = () => {
     let result = [operandOne.value.join(""), operator.value, operandTwo.value.join("")];
-    result[0] = Number(result[0]);
+    if (result[0] !== "") {
+        result[0] = Number(result[0]);
+    };
+    if (result[2] !== "") {
+        result[2] = Number(result[2]);
+    };
     result = result.join(" ");
 
     return result;
@@ -114,7 +119,9 @@ function evaluate() {
         return result;
     }
     if (equation === '/') {
-        if (numberTwo === 0) {return console.log("No dividing by zero!")};
+        if (numberTwo === 0) {
+            return console.log("No dividing by zero!")
+        };
         const result = numberOne / numberTwo;
         console.log(`${numberOne} / ${numberTwo} = ${result}`);
         numberContainer.textContent = `${result}`;
@@ -212,6 +219,7 @@ calculatorButtons.forEach(button => {
                 /* this function is needed to carry over an evaluation to the beginning
                  of the input array after reseting the input array */
                 function setOperandOneValue() {
+                    if (result === undefined) {return};
                     if (result > Number.MAX_SAFE_INTEGER || result < Number.MIN_SAFE_INTEGER) {
                         const re = /,/gi;
                         const value = result.toLocaleString().replace(re, "");
@@ -229,13 +237,13 @@ calculatorButtons.forEach(button => {
                         array[i] = Number(array[i]);
                     };
 
+                    operandOne.hasValue = true;
                 };
 
                 const result = evaluate();
                 resetInputArrayAndValues();
                 setOperandOneValue();
-                operandOne.hasValue = true;
-                if (isValueAnOperator) {
+                if (isValueAnOperator && operandOne.hasValue === true) {
                     operator.value.push(value);
                     operator.hasValue = true;
                     operandOne.finishedWithInput = true;
