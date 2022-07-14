@@ -1,7 +1,4 @@
 .wrapper {
-    display: flex;
-    justify-content: center;
-
     height: 100vh;
     width: auto;
 }
@@ -9,9 +6,10 @@
 .calculator-body {
     display: flex;
     flex-flow: column wrap;
-
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 15px;
-    height: 500px;
+    min-height: 500px;
     width: 425px;
     border: red solid 4px;
     border-radius: 5%;
@@ -27,7 +25,7 @@
     justify-content: flex-end;
     max-width: 100%;
     align-items: center;
-    font-size: 45px;
+    font-size: 25px;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     flex: auto;
     min-height: 75px;
