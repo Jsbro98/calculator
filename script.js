@@ -28,10 +28,12 @@ const operandTwo = {
 
 const operator = {
     hasValue: false,
+    finishedWithInput: false,
     value: [],
     resetValues() {
         this.hasValue = false;
         this.value = [];
+        this.finishedWithInput = false;
     },
 };
 
@@ -61,6 +63,7 @@ const input = [operandOne.value, operator.value, operandTwo.value, operatorOrEqu
 
 const numberDisplayValue = () => {
     let result = [operandOne.value.join(""), operator.value, operandTwo.value.join("")];
+    result[0] = Number(result[0]);
     result = result.join(" ");
 
     return result;
@@ -95,22 +98,26 @@ function evaluate() {
     if (equation === '+') {
         const result = numberOne + numberTwo;
         console.log(`${numberOne} + ${numberTwo} = ${result}`);
+        numberContainer.textContent = `${result}`;
         return result;
     }
     if (equation === '-') {
         const result = numberOne - numberTwo;
         console.log(`${numberOne} - ${numberTwo} = ${result}`);
+        numberContainer.textContent = `${result}`;
         return result;
     }
     if (equation === '*') {
         const result = numberOne * numberTwo;
         console.log(`${numberOne} * ${numberTwo} = ${result}`);
+        numberContainer.textContent = `${result}`;
         return result;
     }
     if (equation === '/') {
         if (numberTwo === 0) {return console.log("No dividing by zero!")};
         const result = numberOne / numberTwo;
         console.log(`${numberOne} / ${numberTwo} = ${result}`);
+        numberContainer.textContent = `${result}`;
         return result;
     }
 };
@@ -187,14 +194,15 @@ calculatorButtons.forEach(button => {
         // function for pushing the numbers and operators from the calculator buttons into the input array above
         function pushIntoInputArray() {
             const value = e.target.textContent;
-            if ((operandOne.finishedWithInput === false) && isValueAnOperator === false) {
+            if ((operandOne.finishedWithInput === false) && isValueAnOperator === false && value !== "=") {
                 operandOne.value.push(value);
                 operandOne.hasValue = true;
             }
-            if (operandOne.hasValue && isValueAnOperator && operandTwo.hasValue === false) {
+            if (operandOne.hasValue && isValueAnOperator && operandTwo.hasValue === false && operator.finishedWithInput !== true) {
                 operator.value.push(value);
                 operator.hasValue = true;
                 operandOne.finishedWithInput = true;
+                operator.finishedWithInput = true;
             }
             if (operandOne.finishedWithInput && operator.hasValue && !isValueAnOperator && value !== "=") {
                 operandTwo.value.push(value);
@@ -229,8 +237,9 @@ calculatorButtons.forEach(button => {
                 operandOne.hasValue = true;
                 if (isValueAnOperator) {
                     operator.value.push(value);
+                    operator.hasValue = true;
+                    operandOne.finishedWithInput = true;
                 }
-                operator.hasValue = true;
             };
 
             numberContainer.textContent = numberDisplayValue();
