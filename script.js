@@ -220,6 +220,7 @@ calculatorButtons.forEach(button => {
                  of the input array after reseting the input array */
                 function setOperandOneValue() {
                     if (result === undefined) {return};
+                    operandOne.hasValue = true;
                     if (result > Number.MAX_SAFE_INTEGER || result < Number.MIN_SAFE_INTEGER) {
                         const re = /,/gi;
                         const value = result.toLocaleString().replace(re, "");
@@ -237,7 +238,6 @@ calculatorButtons.forEach(button => {
                         array[i] = Number(array[i]);
                     };
 
-                    operandOne.hasValue = true;
                 };
 
                 const result = evaluate();
