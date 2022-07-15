@@ -62,12 +62,21 @@ const operatorOrEquals = {
 const input = [operandOne.value, operator.value, operandTwo.value, operatorOrEquals.value];
 
 const numberDisplayValue = () => {
+    
     let result = [operandOne.value.join(""), operator.value, operandTwo.value.join("")];
     if (result[0] !== "") {
-        result[0] = Number(result[0]);
+        if (operandOne.isNegative) {
+            result[0] = -Math.abs(Number(result[0]));
+        } else {
+            result[0] = Number(result[0]);
+        };
     };
     if (result[2] !== "") {
-        result[2] = Number(result[2]);
+        if (operandTwo.isNegative) {
+            result[2] = -Math.abs(Number(result[2]));
+        } else {
+            result[2] = Number(result[2]);
+        };
     };
     result = result.join(" ");
 
