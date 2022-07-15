@@ -61,6 +61,7 @@ const operatorOrEquals = {
 // the input array that the calculator uses for storing and evaluating
 const input = [operandOne.value, operator.value, operandTwo.value, operatorOrEquals.value];
 
+// this is the function that puts the values in our calculator display
 const numberDisplayValue = () => {
     
     let result = [operandOne.value.join(""), operator.value, operandTwo.value.join("")];
@@ -177,6 +178,7 @@ function makeValueNegative() {
 
 // setting event listeners for negative and clear buttons
 negativeButton.addEventListener('click', makeValueNegative);
+negativeButton.addEventListener('click', () => {numberContainer.append("-")});
 clearButton.addEventListener('click',() => {resetInputArrayAndValues(); console.log("input cleared"); numberContainer.textContent = "";});
 
 // function for resetting resetting input array
