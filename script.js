@@ -159,18 +159,21 @@ function addButtonListeners() {
 
 // function to set isNegative on operand objects
 function makeValueNegative() {
-    let negativeDisplay = numberDisplayValue();
     const isOperandOneDone = (operandOne.hasValue && operandOne.finishedWithInput);
     const isOperandTwoDone = operandTwo.hasValue;
     const isOperatorDone = operator.hasValue;
     const isOperandOneAndOperatorDone = (isOperandOneDone && isOperatorDone);
 
-    if(isOperandOneDone && !isOperandOneAndOperatorDone && operandOne.value !== 0) {
+    if(isOperandOneDone && isOperandOneAndOperatorDone === false && operandOne.value !== 0) {
 
        return operandOne.isNegative = true;
+
     } else if ((isOperandTwoDone || isOperandOneAndOperatorDone) && operandTwo.value !== 0) {
+
        return operandTwo.isNegative = true;
+
     } else  {
+
         return operandOne.isNegative = true;
     }
 
@@ -178,7 +181,26 @@ function makeValueNegative() {
 
 // setting event listeners for negative and clear buttons
 negativeButton.addEventListener('click', makeValueNegative);
-negativeButton.addEventListener('click', () => {numberContainer.append("-")});
+// this function appends a negative sign to the calculator display
+const appendNegativeSign = () => {
+    const value = [...numberContainer.textContent];
+    let numberOfNegatives = 0;
+
+    for (index of value) {
+        if (index === "-") {
+            numberOfNegatives++;
+        }
+    };
+
+    if (numberOfNegatives === 0 && operandOne.hasValue === false ) {
+        numberContainer.append("-");
+    };
+
+    if (numberOfNegatives === 1 && operandOne.finishedWithInput && operator.finishedWithInput && operandTwo.hasValue === false) {
+        numberContainer.append("-");
+    };
+};
+negativeButton.addEventListener('click', appendNegativeSign);
 clearButton.addEventListener('click',() => {resetInputArrayAndValues(); console.log("input cleared"); numberContainer.textContent = "";});
 
 // function for resetting resetting input array
