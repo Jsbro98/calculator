@@ -88,6 +88,14 @@ function evaluate() {
 
         if (currentValue === equation) {
             continue;
+        } else if (Number(currentValue) === numberOne && numberTwo) {
+            if (operandOneIsNegative) {
+                numberOne = -Math.abs(numberOne);
+            }
+            if (operandTwoIsNegative) {
+                numberTwo = -Math.abs(numberTwo);
+            }
+
         } else if (Number(currentValue) === numberOne && numberOne !== 0) {
             if (operandOneIsNegative) {
                 numberOne = -Math.abs(numberOne);
@@ -155,10 +163,8 @@ function makeValueNegative() {
     const isOperatorDone = operator.hasValue;
     const isOperandOneAndOperatorDone = (isOperandOneDone && isOperatorDone);
 
-    if(isOperandOneDone && !isOperandOneAndOperatorDone && operandOne.value !== 0) {
+    if(isOperandOneDone && isOperandOneAndOperatorDone && operandOne.value !== 0) {
 
-       return operandOne.isNegative = true;
-    } else if ((isOperandTwoDone || isOperandOneAndOperatorDone) && operandTwo.value !== 0) {
        return operandTwo.isNegative = true;
     } else  {
         return operandOne.isNegative = true;
