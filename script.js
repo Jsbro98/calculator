@@ -14,11 +14,16 @@ const addClickListenser = (element, callback) => {
 
 // master input
 let input = '';
+let displayText = '';
 let operatorCounter = 0;
 
 // setting up the calculator screen
 const parseInputString = () => {
-    let displayText = input;
+    displayText = input;
+    displayText = displayText.replace(/[+\/*-]/g, (match) => {
+        return ` ${match} `;
+    })
+
     return inputDisplay.textContent = displayText;
 }
 
@@ -108,6 +113,8 @@ const splitInputString = (string = input, anOperator = undefined) => {
     if (!operator) {return};
 
     const array = string.split(`${operator}`);
+
+    if (array.length === 3) {array.shift()};
 
     if (!Number(array[0]) || !Number(array[1])) {return};
 
