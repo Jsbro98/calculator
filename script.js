@@ -90,10 +90,10 @@ function evaluate() {
             continue;
         } else if (Number(currentValue) === numberOne && numberTwo) {
             if (operandOneIsNegative) {
-                numberOne = -Math.abs(numberOne);
+                numberOne = -numberOne;
             }
             if (operandTwoIsNegative) {
-                numberTwo = -Math.abs(numberTwo);
+                numberTwo = -numberTwo;
             }
 
         } else if (Number(currentValue) === numberOne && numberOne !== 0) {
