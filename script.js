@@ -17,7 +17,7 @@ let input = '';
 
 
 const makeNegative =(input) => {
-    return -input;
+    return String(-input);
 };
 
 const add = (num1, num2) => {
@@ -37,12 +37,42 @@ const divide = (num1, num2) => {
     return num1 / num2;
 };
 
-const returnValue = (element) => {
+const returnValueOfElmnt = (element) => {
     return element.target.value;
 };
 
 const addToInput = (element) => {
     console.log(input);
-    let value = returnValue(element);
+    let value = returnValueOfElmnt(element);
    return input += value;
 }
+
+// functions to evaluate the value type
+
+const isValueAnOperator = (value) => {
+    // using teneray operator to shorten
+    return value === '+' ? true : 
+            value === '-' ? true : 
+            value === '*' ? true :
+            value === '/' ? true : false;
+};
+
+const isValueNegative = value => value === '(-)' ? true : false;
+
+const returnExactOperator = (string) => {
+    const array = [...string];
+    for (index of array) {
+        if (isValueAnOperator(index)) {
+            return index;
+        };
+    };
+};
+
+// core function to make the input string into an array of our two numbers
+
+const splitInputString = (string) => {
+    const operator = returnExactOperator(string);
+
+    return string.split(`${operator}`);
+
+};
