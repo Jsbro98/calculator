@@ -22,8 +22,8 @@ const clearInput = () => {
 };
 
 
-const makeNegative =(input) => {
-    return String(-input);
+const makeNumNegative = (value = input) => {
+    return String(-value);
 };
 
 const add = (num1, num2) => {
@@ -48,8 +48,10 @@ const returnValueOfElmnt = (element) => {
 };
 
 const addToInput = (element) => {
-    console.log(input);
     let value = returnValueOfElmnt(element);
+
+    if (input.length === 0 && isValueAnOperator(value)) {return};
+
    return input += value;
 }
 
@@ -77,10 +79,14 @@ const returnExactOperator = (string = input) => {
 };
 
 
-const splitInputString = (string, anOperator = undefined) => {
+const splitInputString = (string = input, anOperator = undefined) => {
     const operator = anOperator ?? returnExactOperator();
 
+    if (!operator) {return};
+
     const array = string.split(`${operator}`);
+
+    if (!Number(array[0]) || !Number(array[1])) {return};
 
     return array.map(string => Number(string));
 
@@ -104,6 +110,23 @@ function evaluate() {
            return input = String(divide(num1, num2));
     };
 };
+
+// creating function to change the numbers to negative
+
+const makeNegative = () => {
+  if (isNaN(Number(input)) || input.length === 0) {
+    if (splitInputString() === undefined) {return}
+    const operator = returnExactOperator();
+    const array = splitInputString();
+    array[2] = makeNumNegative(array[1]);
+    array[1] = operator;
+    return input = array.join('');
+  } else {
+    return input = String(-input);
+  }
+
+};
+
 
 // adding event listeners to the buttons
 
