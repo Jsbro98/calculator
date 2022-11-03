@@ -16,6 +16,11 @@ let input = '';
 
 // creating some pure functions
 
+const clearInput = () => {
+    input = '';
+    return input;
+};
+
 
 const makeNegative =(input) => {
     return String(-input);
@@ -62,7 +67,7 @@ const isValueNegative = value => value === '(-)' ? true : false;
 
 
 // core functions to make the input string into an array of our two numbers
-const returnExactOperator = (string) => {
+const returnExactOperator = (string = input) => {
     const array = [...string];
     for (index of array) {
         if (isValueAnOperator(index)) {
@@ -72,8 +77,8 @@ const returnExactOperator = (string) => {
 };
 
 
-const splitInputString = (string) => {
-    const operator = returnExactOperator(string);
+const splitInputString = (string, anOperator = undefined) => {
+    const operator = anOperator ?? returnExactOperator();
 
     const array = string.split(`${operator}`);
 
@@ -83,19 +88,26 @@ const splitInputString = (string) => {
 
 // master evaluate function
 
-function evaluate(inputString) {
-    const operator = returnExactOperator(inputString);
+function evaluate() {
+    const operator = returnExactOperator(input);
 
-    const [num1, num2] = splitInputString(inputString);
+    const [num1, num2] = splitInputString(input, operator);
 
     switch (operator) {
         case ('+'):
-           return add(num1, num2);
+           return input = String(add(num1, num2));
         case ('-'):
-           return subtract(num1, num2);
+           return input = String(subtract(num1, num2));
         case ('*'):
-           return multiply(num1, num2);
+           return input = String(multiply(num1, num2));
         case ('/'):
-           return divide(num1, num2);
+           return input = String(divide(num1, num2));
     };
 };
+
+// adding event listeners to the buttons
+
+keypadButtons.forEach(button => addClickListenser(button, addToInput));
+equationButtons.forEach(button => addClickListenser(button, addToInput));
+addClickListenser(clearButton, clearInput);
+addClickListenser(equalsButton, evaluate);
