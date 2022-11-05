@@ -75,7 +75,10 @@ const addToInput = (element) => {
     if (isOperator) {operatorCounter++};
 
     if (input.length === 0 && isOperator) {return};
-    if (isOperator && operatorCounter > 1) {return (evaluate(), addOperatorToInput(value), operatorCounter--)};
+    if (isOperator && operatorCounter > 1) {
+        if (isValueAnOperator(input.charAt(input.length - 1))) {return};
+        return (evaluate(), addOperatorToInput(value), operatorCounter--)
+    };
 
    return input += value;
 }
