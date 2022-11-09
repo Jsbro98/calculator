@@ -99,9 +99,13 @@ const isValueNegative = value => value === '(-)' ? true : false;
 // core functions to make the input string into an array of our two numbers
 const returnExactOperator = (string = input) => {
     const array = [...string];
+    let notationIndex;
+    if (inputHasScientificNotation()) {
+        return notationIndex = locateNotationIndex();
+    };
     for (let i = 0; i < array.length; i++) {
         let index = array[i];
-        if (index === '-' && i === 0) {
+        if (index === '-' && i === 0 || i === notationIndex) {
             continue
         } else if (isValueAnOperator(index)) {
             return index;
@@ -123,6 +127,15 @@ const splitInputString = (string = input, anOperator = undefined) => {
 
     return array.map(string => Number(string));
 
+};
+
+const inputHasScientificNotation = () => {
+    const array = [...input];
+    return array.includes("e");
+};
+
+const locateNotationIndex = () => {
+    return input.findIndex(index => index === "e") + 1;
 };
 
 // master evaluate function
