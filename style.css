@@ -83,12 +83,12 @@
 }
 
 .keypad-container > button:hover {
-    background-color: rgb(217, 0, 0);
+    background-color: rgb(185, 0, 0);
     border: red solid 2px;
 }
 
 .keypad-container > button:active {
-    background-color: rgb(255, 79, 79);
+    background-color: rgb(255, 82, 82);
 }
 
 .keypad-zero-wrapper {
@@ -109,12 +109,12 @@
 }
 
 .keypad.zero:hover {
-    background-color: rgb(217, 0, 0);
+    background-color: rgb(185, 0, 0);
     border: red solid 2px;
 }
 
 .keypad.zero:active {
-    background-color: rgb(255, 79, 79);
+    background-color: rgb(255, 82, 82);
 }
 
 /* Equation Buttons Styling */
@@ -165,7 +165,7 @@
 }
 
 .clear-button:hover {
-    background-color: rgb(227, 227, 0);
+    background-color: rgb(196, 196, 0);
 }
 
 .clear-button:active {
@@ -182,7 +182,7 @@
 }
 
 .equals-button:hover {
-    background-color: rgb(217, 0, 0);
+    background-color: rgb(180, 0, 0);
     border: red solid 2px;
 }
 
