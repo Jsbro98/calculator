@@ -101,7 +101,10 @@ const returnExactOperator = (string = input) => {
     const array = [...string];
     let notationIndex;
     if (inputHasScientificNotation()) {
-        return notationIndex = locateNotationIndex();
+        if (isOperatorPlusWhileInputHasScientificNotation()) {
+            return "+"
+        };
+        notationIndex = locateNotationIndex();
     };
     for (let i = 0; i < array.length; i++) {
         let index = array[i];
@@ -116,10 +119,19 @@ const returnExactOperator = (string = input) => {
 
 const splitInputString = (string = input, anOperator = undefined) => {
     const operator = anOperator ?? returnExactOperator();
+    let array;
 
     if (!operator) {return};
 
-    const array = string.split(`${operator}`);
+    if (inputHasScientificNotation) {
+        const index = findRealOperatorIndex();
+        const num1 = input.slice(0, index);
+        const num2 = input.slice(index + 1)
+        array = [num1, num2]
+    } else {
+        array = string.split(`${operator}`);
+    }
+
 
     if (array.length === 3) {array.shift()};
 
@@ -135,7 +147,28 @@ const inputHasScientificNotation = () => {
 };
 
 const locateNotationIndex = () => {
-    return input.findIndex(index => index === "e") + 1;
+    return [...input].findIndex(index => index === "e") + 1;
+};
+
+const isOperatorPlusWhileInputHasScientificNotation = () => {
+    const number =[...input].filter(index => index === "+").length;
+    if (number === 2) {
+        return true;
+    } else {
+        return false;
+    };
+};
+
+const findRealOperatorIndex = () => {
+    const notationIndex = locateNotationIndex();
+    const array = [...input];
+
+    for (let i = 0; i < array.length; i++) {
+        if (i === notationIndex) {continue};
+        if (isValueAnOperator(array[i])) {
+            return i;
+        };
+    };
 };
 
 // master evaluate function
