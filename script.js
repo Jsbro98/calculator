@@ -165,7 +165,7 @@ const findRealOperatorIndex = () => {
 
     for (let i = 0; i < array.length; i++) {
         if (i === notationIndex) {continue};
-        if (isValueAnOperator(array[i])) {
+        if (isValueAnOperator(array[i]) && i !== 0) {
             return i;
         };
     };
