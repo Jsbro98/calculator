@@ -69,6 +69,8 @@ const addOperatorToInput = (value) => {
     return input += value;
 }
 
+// main function to push items into the master input
+
 const addToInput = (element) => {
     let value = returnValueOfElmnt(element);
     const isOperator = isValueAnOperator(value);
@@ -140,6 +142,8 @@ const splitInputString = (string = input, anOperator = undefined) => {
     return array.map(string => Number(string));
 
 };
+
+// functions to handle scientific notaion input
 
 const inputHasScientificNotation = () => {
     const array = [...input];
